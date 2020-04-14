@@ -4,25 +4,23 @@ const fetch = require('node-fetch')
 const context= require('./context')
 
 /**
- * Finds and delete a specific drug prescription from the user's prescriptions
+ * Add a new contact to the array of user contacts
  * 
- * @param {drugId} drugId drug's unique id, the drug that user want to delete of his/her prescription
+ * @param {string} idSecondUser the id of the user to delete
  *
- * @returns {<undefined>} undefined on a successful deletion
+ * @returns {Promise<undefined>} an empty Promise on a successful deletion
  * 
- * @throws {NotFoundError} if the user, the drug or the prescription does not exist
- *
- * @throws {Error} if there are unkown error from the api or server's error
+ * @throws {NotFoundError} if the users do not exist
  */
 
 
-module.exports = function (idDrug) {
-    validate.string(idDrug, 'idDrug')
+module.exports = function (idSecondUser) {
+    validate.string(idSecondUser, 'idSecondUser')
 
     return (async() => {
         const token = await this.storage.getItem('token')
    
-        const response = await fetch(`${this.API_URL}/users/prescription/${idDrug}`, {
+        const response = await fetch(`${this.API_URL}/users/delete-contact/${idSecondUser}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

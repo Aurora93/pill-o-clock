@@ -1,12 +1,12 @@
-const { addContact } = require('../../logic')
-const { ContentError } = require('pill-o-clock-errors')
+const { deleteContact } = require('../../logic')
+const { NotAllowedError, ContentError, NotFoundError } = require('pill-o-clock-errors')
 
 module.exports = (req, res) => {
-    const { payload: { sub: id }, body: {id2}} = req 
+    const { payload: { sub: idUser }, params: {idSecondUser}} = req 
 
     try {
-        addContact(id, id2) 
-            .then(() => res.status(201).end())
+        deleteContact(idUser, idSecondUser)
+            .then(() => res.status(200).end())
             .catch(error => {
                 let status = 400
 
@@ -24,8 +24,11 @@ module.exports = (req, res) => {
         if (error instanceof TypeError || error instanceof ContentError)
             status = 406 // not acceptable
 
-        if (error instanceof NotFoundError )
+        if (error instanceof NotFoundError)
             status = 404
+
+        if (error instanceof NotAllowedError)
+            status = 401
 
         const { message } = error
 

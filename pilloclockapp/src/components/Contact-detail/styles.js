@@ -14,8 +14,6 @@ const styles = StyleSheet.create({
         color : '#297885',
         fontSize : 50,
         marginLeft : 20,
-        //marginTop : 40,
-        
     },
 
     text : {
@@ -24,6 +22,13 @@ const styles = StyleSheet.create({
         fontSize : 40,
         marginLeft : 50,
         marginBottom: 20
+    },
+
+    delete : {
+        fontFamily : 'Chocolate_DRINK_DEMO',
+        fontSize : 30,
+        color : '#FC94AD',
+        alignSelf: 'center'
     }
 
 })

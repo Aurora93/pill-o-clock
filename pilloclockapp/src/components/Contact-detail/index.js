@@ -2,8 +2,8 @@ import React from 'react'
 import styles from './styles'
 import { Platform, View, Text, Linking, TextInput, ScrollView, Image, Button, TouchableOpacity} from 'react-native'
 
-function ContactDetail ({contactData}){
-    let {name, surname, phone, email} = contactData
+function ContactDetail ({contactData, todeleteContact}){
+    let {name, surname, phone, email, id} = contactData
 
     makeCall=()=>{
         let phoneNumber =''
@@ -28,6 +28,10 @@ function ContactDetail ({contactData}){
 
             <Text style ={styles.header}>Email: </Text> 
             <Text style ={styles.text} onPress={() => Linking.openURL(`mailto:${email}`)}>{email}</Text>
+
+            <TouchableOpacity onPress={()=> todeleteContact(id)}>
+                <Text style = { styles.delete }>Delete contact</Text>
+            </TouchableOpacity>
             
         </View>
     )

@@ -41,7 +41,8 @@ import logic, {
   retrieveContacts,
   retrieveDrugs,
   retrieveProgress,
-  isLoggedIn
+  isLoggedIn,
+  deleteContact
 } from './src/logic'
 
 import config from './config'
@@ -283,6 +284,7 @@ function App() {
   }
 
   async function handleToDeleteMedication({id}) {
+    Alert.alert('Deleted medication')
     try {
       await deleteMedication(id)
 
@@ -315,8 +317,8 @@ function App() {
 
   async function handleToContacts() {
     try {
-      const _contacts = await retrieveContacts()
-      setContacts(_contacts)
+      const contacts = await retrieveContacts()
+      setContacts(contacts)
       setView('contacts')
 
     } catch ({message}) {
@@ -342,8 +344,8 @@ function App() {
   function handleToAddPatients() {
     setView('addPatients')
   }
-  function handleToContactDetail({name, surname, phone, email}) {
-    setContactData({name, surname, phone, email})
+  function handleToContactDetail({name, surname, phone, email, id}) {
+    setContactData({name, surname, phone, email, id})
     setView('contactDetail')
   }
 
@@ -351,6 +353,17 @@ function App() {
     setPatient(patient)
     setView('patientDetail')
 
+  }
+
+  async function handleDeleteContact(idContact){
+    Alert.alert('Deleted contact')
+    try{
+      await deleteContact(idContact)
+      handleToContacts()
+    }catch({message}){
+      console.log(message)
+      __handleError__(message)
+    }
   }
 
   return (
@@ -370,7 +383,7 @@ function App() {
         {view === 'addContacts' && <AddContacts />}
         {view === 'patients' && ( <Patients contacts={contacts} toAdd={handleToAddPatients} onPatient={handleToPatientDetail}/>)}
         {view === 'addPatients' && <AddPatient user={user} />}
-        {view === 'contactDetail' && (<ContactDetail contactData={contactData} /> )}
+        {view === 'contactDetail' && (<ContactDetail contactData={contactData} todeleteContact={handleDeleteContact}/> )}
         {view === 'patientDetail' && (<PatientDetail patient={patient} />)  }
       </ScrollView>
     </View>

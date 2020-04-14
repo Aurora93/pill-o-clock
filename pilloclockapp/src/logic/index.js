@@ -18,5 +18,6 @@ module.exports = {
     retrieveProgressRecord: require('./retrieve-progress-record'),
     updateProgress: require('./update-progress'),
     isLoggedIn: require('./is-logged-in'),
-    retrievePatientInfo: require('./retrieve-patient-info')
+    retrievePatientInfo: require('./retrieve-patient-info'),
+    deleteContact: require('./delete-contact')
 }

@@ -17,7 +17,8 @@ const {
     addProgressRecord,
     retrieveProgressRecord,
     updateProgress,
-    retrievePatientInfo
+    retrievePatientInfo,
+    deleteContact
 } = require('./handlers')
 
 const { jwtVerifierMidWare } = require('../mid-wares')
@@ -60,5 +61,7 @@ router.get('/users/progress-record', jwtVerifierMidWare, retrieveProgressRecord)
 router.patch('/users/update-progress', jwtVerifierMidWare, updateProgress)
 
 router.get('/users/retrieve-patient-info/:patientId', jwtVerifierMidWare, retrievePatientInfo)
+
+router.delete('/users/delete-contact/:idSecondUser', jwtVerifierMidWare, deleteContact)
 
 module.exports = router

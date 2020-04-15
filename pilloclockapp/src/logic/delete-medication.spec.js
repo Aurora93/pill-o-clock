@@ -51,7 +51,7 @@ describe('deleteMedication', () => {
             _id = user.id.toString()
             _drugId = drug.id.toString()
     
-            token = jwt.sign({ sub: _id }, 'my cat is a demon', { expiresIn: '1d' })
+            token = jwt.sign({ sub: _id }, JWT_SECRET, { expiresIn: '1d' })
             await logic.__context__.storage.setItem('token', token)
             
             guideline = await Guideline.create({times: [time], prescribed: _id, drug})
@@ -91,7 +91,7 @@ describe('deleteMedication', () => {
             let __password = await bcrypt.hash(password, 10)
             user = await User.create({name, surname, gender, age, phone, profile, email, password: __password})
             _id = user.id.toString()
-            token = jwt.sign({ sub: _id }, 'my cat is a demon', { expiresIn: '1d' })
+            token = jwt.sign({ sub: _id }, JWT_SECRET, { expiresIn: '1d' })
             await logic.__context__.storage.setItem('token', token)
             
             await Drug.deleteMany()
@@ -108,7 +108,7 @@ describe('deleteMedication', () => {
             let __password = await bcrypt.hash(password, 10)
             user = await User.create({name, surname, gender, age, phone, profile, email, password: __password})
             _id = user.id.toString()
-            token = jwt.sign({ sub: _id }, 'my cat is a demon', { expiresIn: '1d' })
+            token = jwt.sign({ sub: _id }, JWT_SECRET, { expiresIn: '1d' })
             await logic.__context__.storage.setItem('token', token)
             
             drug = await Drug.create({drugName, description})

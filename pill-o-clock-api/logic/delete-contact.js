@@ -24,7 +24,7 @@ module.exports = (idUser, idSecondUser)=> {
             
             if (!user) throw new NotFoundError(`user with id ${idUser} not found`)
 
-            if (!secondUser) throw new NotFoundError(`user with id ${secondUser} not found`)
+            if (!secondUser) throw new NotFoundError(`user with id ${idSecondUser} not found`)
   
             if (user.contacts.includes(idSecondUser) && secondUser.contacts.includes(idUser)) return Promise.all([User.findByIdAndUpdate(idUser, {$pull: {contacts: idSecondUser}}), User.findByIdAndUpdate(idSecondUser, {$pull: {contacts: idUser}}) ])
 

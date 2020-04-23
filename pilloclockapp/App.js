@@ -12,6 +12,7 @@ import pushNotification from './pushNotifications';
 import moment from 'moment';
 import PushNotificationAndroid from 'react-native-push-notification';
 
+import {setHour} from './src/utils'
 import {
   Register,
   Login,
@@ -120,7 +121,6 @@ function App() {
           }
           await AsyncStorage.setItem('alarms', JSON.stringify(alarms))
         }
-
         
         for (const drug in alarms) {
           for (const time in alarms[drug]) {
@@ -142,7 +142,7 @@ function App() {
           }
         }
       }
-    }, 60000);
+    }, 60000)
 
     return () => clearInterval(interval)
   }, []);
@@ -241,24 +241,7 @@ function App() {
     const {drug} = info
 
     try {
-      //TODO refactor
-      delete info.drug;
-      let keys = Object.keys(info);
-
-      for (const key in info) {
-        if (typeof info[key] === 'undefined' || key.includes('hour') &&  !isNaN(info[key]) && info[key] > 24)
-          throw new Error('Please, introduce a correct hour')
-        if (typeof info[key] === 'undefined' || key.includes('min') && !isNaN(info[key]) && info[key] > 59)
-          throw new Error('Please, introduce a correct minutes')
-      }
-
-      const times = []
-
-      for (let i = 1; i < keys.length / 2 + 1; i++) {
-        if (info[`hour${i}`].length === 1) {info[`hour${i}`] = `0${info[`hour${i}`]}`}
-
-        times.push(`${info[`hour${i}`]}` + `${info[`min${i}`]}`)
-      }
+      let times = setHour(info, drug)
 
       await addMedication(drug, times)
       handleToMedication()
@@ -284,7 +267,7 @@ function App() {
   }
 
   async function handleToDeleteMedication({id}) {
-    Alert.alert('Deleted medication')
+    Alert.alert('medication deleted')
     try {
       await deleteMedication(id)
 
@@ -352,14 +335,26 @@ function App() {
   function handleToPatientDetail(patient){
     setPatient(patient)
     setView('patientDetail')
-
   }
 
   async function handleDeleteContact(idContact){
-    Alert.alert('Deleted contact')
     try{
-      await deleteContact(idContact)
-      handleToContacts()
+      Alert.alert(
+        'Hey!',
+        'Do you really want to delete this contact?',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => {},
+            style: 'cancel',
+          },
+          {text: 'Confirm delete', onPress: async () => {
+            await deleteContact(idContact)
+            handleToContacts()
+          }},
+        ],
+        {cancelable: false},
+      )   
     }catch({message}){
       console.log(message)
       __handleError__(message)

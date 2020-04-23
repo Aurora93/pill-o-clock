@@ -6,8 +6,6 @@ const context = require('./context')
 /**
  * Finds and receives contacts from the user
  * 
- * @param {string} id user's unique id
- * 
  * @returns {<array>} user's contacts
  * 
  * @throws {NotFoundError} if the user does not exist

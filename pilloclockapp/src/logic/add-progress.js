@@ -6,9 +6,7 @@ const context= require('./context')
 /**
  * Add a boolean if the user hace taked the drug or not to an daily array of progress
  * 
- * @param {string} id user's unique id
- * 
- * @param {boolean} progress determine if the user have taked the drug (tue) or not (false)
+ * @param {boolean} check determine if the user have taked the drug (tue) or not (false)
  *
  * @returns {<undefined>} an undefined on a successful addition
  * 

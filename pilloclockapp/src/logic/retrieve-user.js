@@ -6,8 +6,6 @@ const context = require('./context')
 /**
  * Finds and receives data from a desired user
  * 
- * @param {string} id user's unique id
- * 
  * @returns {Promise<string>} user's name, surname, gender, age, phone, profile, email and id from storage
  * 
  * @throws {NotFoundError} if the user does not exist

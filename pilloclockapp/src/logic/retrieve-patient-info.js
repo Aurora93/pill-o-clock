@@ -6,8 +6,6 @@ const context = require('./context')
 /**
  * Finds and receives the patient info (the daily progress and the progress of the current day) to the pharmacist
  * 
- * @param {string} id the unique user id from the pharmacist
- * 
  * @param {string} patientId the unique user id from the pharmacist's patient
  *
  * @returns {Promise<object>} the daily progress and the progress of the current day

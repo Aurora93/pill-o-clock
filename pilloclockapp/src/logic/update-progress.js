@@ -5,8 +5,6 @@ const context= require('./context')
 
 /**
  * Resets the array of progress when changes the current day to reset the alarms
- * 
- * @param {string} id the unique user
  *
  * @returns {Promise<undefines>} an empty Promise on a successful updating 
  * 

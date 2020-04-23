@@ -5,8 +5,6 @@ const context= require('./context')
 
 /**
  * Finds and receives all user's progress record
- * 
- * @param {string} id the unique user
  *
  * @returns {<object>} the user daily progress record (with the level of succes and the day date)
  * 

@@ -5,8 +5,6 @@ const context= require('./context')
 
 /**
  * Finds and receives all user's prescriptions
- * 
- * @param {string} id the unique user
  *
  * @returns {<object>} the user prescriptions (with drugs that user takes and times when user have to take) and drug's information
  * 

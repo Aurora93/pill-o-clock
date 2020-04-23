@@ -5,8 +5,6 @@ const context = require('./context')
 
 /**
  * Finds and receives the user progress of the current day
- * 
- * @param {string} id the unique user
  *
  * @returns {<array>} the array of patient's progress set up in boolean values
  * 
